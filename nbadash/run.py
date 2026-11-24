@@ -162,7 +162,7 @@ def main() -> None:
             if res.name == "Polymarket US":
                 log.info("  PMUS marketCounts sample: %s", [ev.get("marketCounts") for ev in res.raw_samples[:2]])
             if res.name == "Polymarket US":
-                for ev in res.raw_samples[:2]:
+                for ev in res.raw_samples[2:4] or res.raw_samples[:2]:
                     ms = ev.get("markets") or []
                     log.info("PMUS sample event: title=%r start=%r keys=%s nmarkets=%d", ev.get("title"),
                              ev.get("startTime") or ev.get("eventDate"), sorted(ev.keys())[:25], len(ms))

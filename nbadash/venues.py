@@ -288,10 +288,28 @@ def fetch_pmus() -> VenueResult:
             if len(evs) < 50 or offset > 1000:
                 break
             offset += 50
+        now = time.time()
         for ev in events:
             if len(res.raw_samples) < 2:
                 res.raw_samples.append(ev)
-            for m in ev.get("markets") or []:
+            # The league endpoint returns only the main market; pull the game's full moneyline/spread/total set.
+            mkts = {m.get("slug") or m.get("id"): m for m in ev.get("markets") or []}
+            st = _ts(ev.get("startTime")) or _ts(ev.get("eventDate"))
+            gid = ev.get("gameId")
+            if gid and st and -6 * 3600 < st - now < 60 * 3600:
+                try:
+                    params = [("gameId", str(gid)), ("active", "true"), ("closed", "false"), ("limit", "500")]
+                    params += [("sportsMarketTypes", t) for t in ("SPORTS_MARKET_TYPE_MONEYLINE",
+                                                                  "SPORTS_MARKET_TYPE_SPREAD",
+                                                                  "SPORTS_MARKET_TYPE_TOTAL")]
+                    for m in api.get("/v1/markets", params).get("markets") or []:
+                        mkts.setdefault(m.get("slug") or m.get("id"), m)
+                except Exception as e:
+                    log.warning("PM US markets for game %s: %s", gid, e)
+            if len(res.raw_samples) < 4 and len(mkts) > 1:
+                res.raw_samples.append({"title": ev.get("title"), "startTime": ev.get("startTime"),
+                                        "markets": list(mkts.values())[:6]})
+            for m in mkts.values():
                 res.markets_seen += 1
                 try:
                     res.quotes.extend(_pm_quotes(ev, m))
