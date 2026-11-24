@@ -1,0 +1,106 @@
+{
+ "date": "2026-11-23",
+ "games": {
+  "401910036": {
+   "away": "Memphis Grizzlies",
+   "home": "Charlotte Hornets",
+   "proj": 216.8,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910037": {
+   "away": "Portland Trail Blazers",
+   "home": "Philadelphia 76ers",
+   "proj": 230.3,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910038": {
+   "away": "Oklahoma City Thunder",
+   "home": "Indiana Pacers",
+   "proj": 227.6,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910039": {
+   "away": "Milwaukee Bucks",
+   "home": "Toronto Raptors",
+   "proj": 224.8,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910040": {
+   "away": "Brooklyn Nets",
+   "home": "Minnesota Timberwolves",
+   "proj": 221.7,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910041": {
+   "away": "Cleveland Cavaliers",
+   "home": "Chicago Bulls",
+   "proj": 239.9,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910042": {
+   "away": "Phoenix Suns",
+   "home": "New Orleans Pelicans",
+   "proj": 231.7,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910043": {
+   "away": "LA Clippers",
+   "home": "Houston Rockets",
+   "proj": 227.0,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910044": {
+   "away": "Utah Jazz",
+   "home": "Los Angeles Lakers",
+   "proj": 226.4,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  },
+  "401910045": {
+   "away": "San Antonio Spurs",
+   "home": "Sacramento Kings",
+   "proj": 220.6,
+   "market_total": null,
+   "venue_main_totals": {},
+   "lean": null,
+   "gap": null,
+   "captured_at": "2026-11-24T04:27+00:00"
+  }
+ },
+ "updated": "2026-11-24T04:27+00:00"
+}
