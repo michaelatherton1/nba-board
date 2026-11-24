@@ -4,25 +4,25 @@
   "401909314": {
    "away": "Detroit Pistons",
    "home": "Orlando Magic",
-   "proj": 213.4,
-   "proj_morning": 213.7,
-   "proj_report": 213.4,
+   "proj": 213.2,
+   "proj_morning": 213.6,
+   "proj_report": 213.2,
    "model_used": "v2 + injury report",
-   "market_total": 213.5,
+   "market_total": 212.5,
    "venue_main_totals": {
     "Kalshi": 212.5,
-    "Polymarket US": 213.5,
-    "Novig": 213.5
+    "Polymarket US": 212.5,
+    "Novig": 212.5
    },
-   "lean": "UNDER",
-   "gap": -0.1,
+   "lean": "OVER",
+   "gap": 0.7,
    "absences": [
     "Paolo Banchero",
     "Duncan Robinson",
     "Jalen Duren",
     "Taurean Prince"
    ],
-   "captured_at": "2026-11-24T05:12+00:00",
+   "captured_at": "2026-11-24T13:51+00:00",
    "first_seen": {
     "time": "2026-11-24T05:12+00:00",
     "market_total": 213.5,
@@ -39,9 +39,9 @@
   "401909315": {
    "away": "Boston Celtics",
    "home": "Washington Wizards",
-   "proj": 218.4,
-   "proj_morning": 217.6,
-   "proj_report": 218.4,
+   "proj": 218.3,
+   "proj_morning": 217.5,
+   "proj_report": 218.3,
    "model_used": "v2 + injury report",
    "market_total": 217.5,
    "venue_main_totals": {
@@ -50,7 +50,7 @@
     "Polymarket US": 217.5
    },
    "lean": "OVER",
-   "gap": 0.9,
+   "gap": 0.8,
    "absences": [
     "Jamir Watkins",
     "Justin Champagnie",
@@ -58,7 +58,7 @@
     "Tristan Vukcevic",
     "Mitchell Robinson"
    ],
-   "captured_at": "2026-11-24T05:12+00:00",
+   "captured_at": "2026-11-24T13:51+00:00",
    "first_seen": {
     "time": "2026-11-24T05:12+00:00",
     "market_total": 217.5,
@@ -75,23 +75,23 @@
   "401909316": {
    "away": "Dallas Mavericks",
    "home": "Denver Nuggets",
-   "proj": 231.8,
-   "proj_morning": 232.9,
-   "proj_report": 231.8,
+   "proj": 231.7,
+   "proj_morning": 232.8,
+   "proj_report": 231.7,
    "model_used": "v2 + injury report",
-   "market_total": 231.5,
+   "market_total": 233.5,
    "venue_main_totals": {
-    "Kalshi": 231.5,
-    "Novig": 226.5,
-    "Polymarket US": 231.5
+    "Kalshi": 233.5,
+    "Novig": 233.5,
+    "Polymarket US": 233.5
    },
-   "lean": "OVER",
-   "gap": 0.3,
+   "lean": "UNDER",
+   "gap": -1.8,
    "absences": [
     "P.J. Washington",
     "Dereck Lively II"
    ],
-   "captured_at": "2026-11-24T05:12+00:00",
+   "captured_at": "2026-11-24T13:51+00:00",
    "first_seen": {
     "time": "2026-11-24T05:12+00:00",
     "market_total": 231.5,
@@ -106,5 +106,5 @@
    }
   }
  },
- "updated": "2026-11-24T05:12+00:00"
+ "updated": "2026-11-24T13:51+00:00"
 }
