@@ -1,0 +1,82 @@
+name: Daily NBA board
+
+on:
+  schedule:
+    # GitHub cron is UTC. 15:23 UTC = 9:23 AM CT (10:23 during daylight time).
+    - cron: "23 15 * * *"
+    # 22:47 UTC = 4:47 PM CT (5:47 during daylight time): fresh lines before tip-off.
+    - cron: "47 22 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-board
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Restore cached history seasons
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: nba-raw-${{ github.run_id }}
+          restore-keys: nba-raw-
+
+      - name: Unit tests
+        run: PYTHONPATH=. python tests/test_venues.py
+
+      - name: Build today's board
+        run: python -m nbadash.run
+
+      - name: Keep raw API samples for debugging
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-${{ github.run_id }}
+          path: debug/
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Commit the day's snapshot (used to grade projections tomorrow)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/history
+          if ! git diff --cached --quiet; then
+            git commit -m "Snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase --autostash
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,6 @@
+data/raw/
+debug/
+site/data/
+__pycache__/
+*.pyc
+.venv/

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NBA Daily Board</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --series-1: #2a78d6; --series-2: #eb6834;
+  --good: #0ca30c; --good-text: #006300; --warning: #fab219; --critical: #d03b3b;
+  --wash: rgba(42,120,214,0.07); --hl: rgba(42,120,214,0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+    --series-1: #3987e5; --series-2: #d95926; --good-text: #0ca30c;
+    --wash: rgba(57,135,229,0.10); --hl: rgba(57,135,229,0.18);
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1080px; margin: 0 auto; padding: 16px 14px 48px; }
+h1 { font-size: 22px; margin: 0 0 2px; }
+h2 { font-size: 17px; margin: 28px 0 10px; }
+h3 { font-size: 15px; margin: 0; }
+.sub { color: var(--ink-2); font-size: 13px; }
+.muted { color: var(--muted); }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 12px 14px; margin: 0 0 10px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 14px; }
+.tile .v { font-size: 24px; font-weight: 650; }
+.tile .k { color: var(--ink-2); font-size: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip { font-size: 12px; border: 1px solid var(--ring); border-radius: 99px; padding: 2px 9px; background: var(--surface); }
+.chip .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
+.ok .dot { background: var(--good); } .bad .dot { background: var(--critical); }
+.row { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; }
+.big { font-size: 20px; font-weight: 650; }
+.lean-OVER, .lean-UNDER { font-weight: 650; }
+.flag { color: var(--ink); font-size: 12.5px; margin-top: 6px; }
+.flag::before { content: "⚠ "; color: var(--warning); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th { text-align: left; font-weight: 600; color: var(--ink-2); font-size: 12px; border-bottom: 1px solid var(--axis); padding: 6px 8px; white-space: nowrap; }
+td { border-bottom: 1px solid var(--grid); padding: 6px 8px; white-space: nowrap; vertical-align: top; }
+td.num, th.num { text-align: right; }
+tr.main td { background: var(--hl); }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+details > summary { cursor: pointer; color: var(--series-1); font-size: 13.5px; margin-top: 8px; }
+details[open] > summary { margin-bottom: 8px; }
+.venue { color: var(--ink-2); font-size: 12px; }
+.leg { border-left: 3px solid var(--axis); padding-left: 10px; margin: 6px 0; }
+.win { color: var(--good-text); font-weight: 600; } .loss { color: var(--critical); font-weight: 600; }
+a { color: var(--series-1); }
+.legend { display: flex; gap: 14px; font-size: 12.5px; color: var(--ink-2); margin: 4px 0 6px; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+#tip { position: fixed; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--ring);
+  border-radius: 8px; padding: 6px 9px; font-size: 12.5px; box-shadow: 0 4px 14px rgba(0,0,0,.15); display: none; z-index: 9; }
+.toggle { font-size: 12.5px; background: none; border: 1px solid var(--ring); color: var(--ink-2); border-radius: 6px; padding: 3px 8px; cursor: pointer; }
+.empty { color: var(--ink-2); }
+footer { color: var(--ink-2); font-size: 12.5px; margin-top: 32px; }
+footer li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>NBA Daily Board</h1>
+    <div class="sub" id="stamp">Loading…</div>
+    <div class="chips" id="venues"></div>
+    <div class="tiles" id="tiles"></div>
+  </header>
+
+  <section>
+    <h2>Arbitrage (after fees)</h2>
+    <div id="arbs"></div>
+  </section>
+
+  <section>
+    <h2>Model vs market: game totals</h2>
+    <div class="card" id="chartCard">
+      <div class="row" style="justify-content:space-between">
+        <div class="legend"><span><span class="sw" style="background:var(--series-1)"></span>Model projection</span>
+          <span><span class="sw" style="background:var(--series-2)"></span>Market main line</span></div>
+        <button class="toggle" id="tblToggle" aria-pressed="false">Table view</button>
+      </div>
+      <div id="chart"></div>
+      <div id="chartTable" hidden></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Games, projections and best lines</h2>
+    <div id="games"></div>
+  </section>
+
+  <section>
+    <h2 id="ydayTitle">Yesterday</h2>
+    <div id="yday"></div>
+  </section>
+
+  <section>
+    <h2>Track record since launch</h2>
+    <div id="track"></div>
+  </section>
+
+  <section>
+    <h2>Team ratings</h2>
+    <div class="card scroll" id="ratings"></div>
+  </section>
+
+  <footer>
+    <ul>
+      <li><b>Model:</b> opponent-adjusted pace and efficiency ratings plus a correction layer for rest, back-to-backs, altitude and form. Walk-forward backtest 2016-17 to 2025-26: average miss 14.7 points vs the market line's 14.4.</li>
+      <li><b>Edge has faded:</b> gaps of 6+ points vs the line hit 57% through 2021-22 but 49.5% over the last four seasons. Treat the lean as a second opinion, not a bet signal.</li>
+      <li><b>No injury data.</b> A big gap often means the market knows about an injury the model doesn't.</li>
+      <li><b>Prices</b> are taker asks for one $1 contract, with each venue's taker fee added (Kalshi 0.07·p·(1−p) × series multiplier; Polymarket US its fee coefficient · p·(1−p); Novig charges nothing before tip-off). Odds shown are American odds equivalent after fees. Lines move fast, so check the venue before trading.</li>
+      <li><b>Arbitrage</b> pairs buy both sides of the same proposition on different venues. Whole-number lines are left out (venues settle pushes differently). Read both rulebooks before trading; edges over 5¢ are usually a rules mismatch or a stale quote.</li>
+      <li>Data: ESPN via sportsdataverse, Kalshi, Polymarket US and Novig public market data. Not financial advice.</li>
+    </ul>
+  </footer>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const f1 = (x) => x == null ? "—" : Number(x).toFixed(1);
+const sgn = (x) => x == null ? "—" : (x > 0 ? "+" : "") + Number(x).toFixed(1);
+const pct = (x, d = 1) => x == null ? "—" : (100 * x).toFixed(d) + "%";
+const cents = (x) => x == null ? "—" : (100 * x).toFixed(1) + "¢";
+const short = (name) => name.split(" ").slice(-1)[0] === "Blazers" ? "Trail Blazers" : name.split(" ").slice(-1)[0];
+
+function priceCell(q) {
+  if (!q) return '<span class="muted">—</span>';
+  const link = q.url ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.venue)}</a>` : esc(q.venue);
+  return `${cents(q.eff)} <span class="muted">(${esc(q.american)})</span><br><span class="venue">${link}</span>`;
+}
+
+async function load() {
+  const r = await fetch("data/latest.json?t=" + Date.now());
+  const d = await r.json();
+  $("stamp").textContent = `Updated ${d.generated_ct} · stats through ${d.data_through} games · league avg ${f1(d.league.avg_total)} pts/game`;
+
+  const vs = Object.entries(d.venues || {});
+  $("venues").innerHTML = vs.length ? vs.map(([n, v]) =>
+    `<span class="chip ${v.ok ? "ok" : "bad"}"><span class="dot"></span>${esc(n)}: ${v.ok ? `${v.matched} prices matched` : "unavailable"}</span>`).join("")
+    : '<span class="chip">Venue prices not pulled this run</span>';
+
+  const todays = d.games.filter(g => g.date === d.today);
+  const t = d.track_record;
+  $("tiles").innerHTML = [
+    [todays.length, "games today"],
+    [d.arbs.length, "arbitrage pairs found"],
+    [t ? `${t.mae_model}` : "—", t ? `model avg miss (pts), ${t.games} games` : "track record starts tomorrow"],
+    [t && t.mae_market != null ? `${t.mae_market}` : "—", "market avg miss (pts)"],
+  ].map(([v, k]) => `<div class="card tile"><div class="v">${esc(v)}</div><div class="k">${esc(k)}</div></div>`).join("");
+
+  renderArbs(d);
+  renderChart(d);
+  renderGames(d);
+  renderYday(d);
+  renderTrack(d);
+  renderRatings(d);
+}
+
+function renderArbs(d) {
+  if (!d.arbs.length) {
+    $("arbs").innerHTML = `<div class="card empty">No fee-adjusted arbitrage across Kalshi, Polymarket US and Novig at the last check (${esc(d.generated_ct)}). These windows are rare and usually close within seconds; a twice-daily snapshot will mostly catch slow ones.</div>`;
+    return;
+  }
+  $("arbs").innerHTML = d.arbs.slice(0, 25).map(a => `
+    <div class="card">
+      <div class="row" style="justify-content:space-between"><h3>${esc(a.matchup)} · ${esc(a.description)}</h3><span class="sub">${esc(a.tip)}</span></div>
+      ${a.legs.map(l => `<div class="leg">Buy <b>${esc(l.label)}</b> on ${l.url ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.venue)}</a>` : esc(l.venue)}
+        at ${cents(l.ask)} + fee ${cents(l.fee)} = <b>${cents(l.eff)}</b>${l.size != null ? ` <span class="muted">· ${Math.round(l.size)} available</span>` : ""}</div>`).join("")}
+      <div class="row" style="margin-top:6px">
+        <span>Cost <b>${cents(a.cost)}</b> per $1 pair</span>
+        <span class="win">Profit ${cents(a.profit)} (${pct(a.roi)})</span>
+        ${a.max_contracts != null ? `<span>Up to ${Math.round(a.max_contracts)} pairs ≈ $${a.max_profit}</span>` : ""}
+      </div>
+      ${a.flags.map(f => `<div class="flag">${esc(f)}</div>`).join("")}
+    </div>`).join("");
+}
+
+function renderChart(d) {
+  const rows = d.games.filter(g => g.proj != null);
+  if (!rows.length) { $("chart").innerHTML = '<div class="empty">No games on the slate.</div>'; return; }
+  const vals = rows.flatMap(g => [g.proj, g.market_total].filter(v => v != null));
+  const lo = Math.floor((Math.min(...vals) - 3) / 5) * 5, hi = Math.ceil((Math.max(...vals) + 3) / 5) * 5;
+  const W = Math.max(320, Math.min(1040, $("chart").clientWidth || 600)), labW = 150, rowH = 30, H = rows.length * rowH + 30;
+  const x = v => labW + (v - lo) / (hi - lo) * (W - labW - 16);
+  let s = `<svg width="100%" viewBox="0 0 ${W} ${H}" role="img" aria-label="Model projection vs market total per game">`;
+  for (let v = lo; v <= hi; v += 5) {
+    s += `<line x1="${x(v)}" x2="${x(v)}" y1="0" y2="${H - 22}" stroke="var(--grid)" stroke-width="1"/>`;
+    s += `<text x="${x(v)}" y="${H - 6}" font-size="11" fill="var(--muted)" text-anchor="middle">${v}</text>`;
+  }
+  rows.forEach((g, i) => {
+    const y = i * rowH + 16;
+    s += `<g class="hit" data-i="${i}"><rect x="0" y="${y - rowH / 2}" width="${W}" height="${rowH}" fill="transparent"/>`;
+    s += `<text x="0" y="${y + 4}" font-size="12.5" fill="var(--ink)">${esc(g.away_abbr)} @ ${esc(g.home_abbr)}${g.date !== d.today ? " (tmrw)" : ""}</text>`;
+    if (g.market_total != null) {
+      s += `<line x1="${x(g.proj)}" x2="${x(g.market_total)}" y1="${y}" y2="${y}" stroke="var(--axis)" stroke-width="2"/>`;
+      s += `<circle cx="${x(g.market_total)}" cy="${y}" r="5" fill="var(--series-2)" stroke="var(--surface)" stroke-width="2"/>`;
+    }
+    s += `<circle cx="${x(g.proj)}" cy="${y}" r="5" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"/></g>`;
+  });
+  s += "</svg>";
+  $("chart").innerHTML = s;
+  const tip = $("tip");
+  $("chart").querySelectorAll(".hit").forEach(el => {
+    const g = rows[+el.dataset.i];
+    const show = (e) => {
+      const mv = g.model_vs_market;
+      tip.innerHTML = `<b>${esc(g.away_short)} @ ${esc(g.home_short)}</b><br>Model ${f1(g.proj)} · Market ${f1(g.market_total)}` +
+        (mv ? `<br>Gap ${sgn(mv.gap)} → ${esc(mv.lean)} (${pct(mv.p_lean)})` : "<br>No market line matched");
+      tip.style.display = "block";
+      const px = (e.touches ? e.touches[0].clientX : e.clientX), py = (e.touches ? e.touches[0].clientY : e.clientY);
+      tip.style.left = Math.min(px + 12, window.innerWidth - 220) + "px"; tip.style.top = (py + 12) + "px";
+    };
+    el.addEventListener("mousemove", show); el.addEventListener("touchstart", show, {passive: true});
+    el.addEventListener("mouseleave", () => tip.style.display = "none");
+  });
+  document.addEventListener("touchstart", (e) => { if (!e.target.closest(".hit")) tip.style.display = "none"; }, {passive: true});
+  $("chartTable").innerHTML = `<div class="scroll"><table><thead><tr><th>Game</th><th class="num">Model</th><th class="num">Market</th><th class="num">Gap</th></tr></thead><tbody>` +
+    rows.map(g => `<tr><td>${esc(g.away_short)} @ ${esc(g.home_short)}</td><td class="num">${f1(g.proj)}</td><td class="num">${f1(g.market_total)}</td><td class="num">${g.model_vs_market ? sgn(g.model_vs_market.gap) : "—"}</td></tr>`).join("") + "</tbody></table></div>";
+  $("tblToggle").onclick = () => {
+    const on = $("chartTable").hidden; $("chartTable").hidden = !on; $("chart").hidden = on;
+    $("tblToggle").setAttribute("aria-pressed", String(on)); $("tblToggle").textContent = on ? "Chart view" : "Table view";
+  };
+}
+
+function linesTable(title, entries, mainLine) {
+  if (!entries || !entries.length) return "";
+  return `<div style="margin-top:8px"><b style="font-size:13px">${esc(title)}</b><div class="scroll"><table>
+    <thead><tr><th>Side A</th><th>Best price</th><th>Side B</th><th>Best price</th><th>Venues</th></tr></thead><tbody>` +
+    entries.map(e => `<tr class="${e.line === mainLine ? "main" : ""}"><td>${esc(e.yes_label)}</td><td>${priceCell(e.yes)}</td>
+      <td>${esc(e.no_label)}</td><td>${priceCell(e.no)}</td><td class="venue">${esc(e.venues.join(", "))}</td></tr>`).join("") +
+    "</tbody></table></div></div>";
+}
+
+function renderGames(d) {
+  if (!d.games.length) { $("games").innerHTML = '<div class="card empty">No games scheduled today or tomorrow.</div>'; return; }
+  $("games").innerHTML = d.games.map(g => {
+    const mv = g.model_vs_market, L = g.lines || {};
+    const rest = (r, b2b) => b2b ? "back-to-back" : `${r} days rest`;
+    const ml = L.ml ? [Object.assign({}, L.ml, {yes_label: `${g.home_short} win`, no_label: `${g.away_short} win`})] : [];
+    return `<div class="card">
+      <div class="row" style="justify-content:space-between"><h3>${esc(g.away)} @ ${esc(g.home)}</h3><span class="sub">${esc(g.tip_et)}${g.started ? " · started" : ""}</span></div>
+      <div class="row" style="margin-top:6px">
+        <span>Model <span class="big">${f1(g.proj)}</span></span>
+        <span>Market <span class="big">${f1(g.market_total)}</span></span>
+        ${mv ? `<span>Gap <b>${sgn(mv.gap)}</b></span><span class="lean-${esc(mv.lean)}">Lean ${esc(mv.lean)} · ${pct(mv.p_lean)}</span>
+          ${mv.best_price ? `<span class="sub">best ${esc(mv.lean.toLowerCase())} ${cents(mv.best_price.eff)} on ${esc(mv.best_price.venue)} · EV ${pct(mv.ev)}</span>` : ""}` : '<span class="sub">no market line matched yet</span>'}
+      </div>
+      <div class="sub" style="margin-top:4px">Exp. pace ${f1(g.exp_pace)} · ${esc(g.away_abbr)} ${f1(g.exp_ortg_a)} / ${esc(g.home_abbr)} ${f1(g.exp_ortg_h)} pts per 100 · ${esc(g.away_abbr)} ${rest(g.a_rest, g.a_b2b)}, ${esc(g.home_abbr)} ${rest(g.h_rest, g.h_b2b)}</div>
+      ${mv && mv.big_gap ? '<div class="flag">Gap of 6+ points: check injury news before trusting the model.</div>' : ""}
+      ${(ml.length || (L.totals || []).length || (L.spreads || []).length) ? `<details><summary>Best lines across venues</summary>
+        ${linesTable("Moneyline", ml, null)}
+        ${linesTable("Totals (highlighted = main line)", L.totals, L.main_total)}
+        ${linesTable("Spreads (highlighted = main line)", L.spreads, L.main_spread)}
+      </details>` : ""}
+    </div>`;
+  }).join("");
+}
+
+function renderYday(d) {
+  const y = d.yesterday;
+  $("ydayTitle").textContent = `Yesterday (${y.date})`;
+  if (!y.games.length) { $("yday").innerHTML = '<div class="card empty">No games yesterday.</div>'; return; }
+  const head = `<tr><th>Game</th><th class="num">Score</th><th class="num">Total</th><th class="num">Model</th><th class="num">Market</th><th>Result</th><th>Lean</th><th class="num">Pace</th></tr>`;
+  const body = y.games.map(g => {
+    const lean = g.lean_correct == null ? '<span class="muted">—</span>' : g.lean_correct ? `<span class="win">✓ ${esc(g.model_lean)}</span>` : `<span class="loss">✗ ${esc(g.model_lean)}</span>`;
+    return `<tr><td>${esc(g.away_short)} @ ${esc(g.home_short)}${g.ot ? ` <span class="muted">(${g.ot}OT)</span>` : ""}</td>
+      <td class="num">${g.a_score}–${g.h_score}</td><td class="num"><b>${g.total}</b></td>
+      <td class="num">${f1(g.proj)}${g.proj_source === "retro" ? '<span class="muted">*</span>' : ""}</td>
+      <td class="num">${f1(g.market_total)}</td><td>${esc(g.result_vs_line || "—")}</td><td>${lean}</td><td class="num">${f1(g.pace)}</td></tr>`;
+  }).join("");
+  const stats = y.games.map(g => `<b style="font-size:13px">${esc(g.away_short)} @ ${esc(g.home_short)}</b><div class="scroll"><table>
+    <thead><tr><th>Team</th><th class="num">Pts</th><th class="num">Pts/100</th><th class="num">eFG%</th><th class="num">TOV%</th><th class="num">3PA rate</th><th class="num">3P%</th><th class="num">FT rate</th><th class="num">OREB</th><th class="num">AST</th></tr></thead><tbody>` +
+    g.teams.map(t => `<tr><td>${esc(t.abbr)}</td><td class="num">${t.pts}</td><td class="num">${f1(t.ortg)}</td><td class="num">${f1(t.efg)}</td><td class="num">${f1(t.tov_pct)}</td><td class="num">${f1(t.three_rate)}</td><td class="num">${f1(t.three_pct)}</td><td class="num">${f1(t.ft_rate)}</td><td class="num">${t.oreb}</td><td class="num">${t.ast}</td></tr>`).join("") +
+    "</tbody></table></div>").join("");
+  const retro = y.games.some(g => g.proj_source === "retro");
+  $("yday").innerHTML = `<div class="card"><div class="scroll"><table><thead>${head}</thead><tbody>${body}</tbody></table></div>
+    ${retro ? '<div class="sub" style="margin-top:6px">* Projection rebuilt after the fact from pre-game ratings (the board wasn\'t running yet); no market line was captured.</div>' : ""}
+    <details><summary>Team box-score stats</summary>${stats}</details></div>`;
+}
+
+function renderTrack(d) {
+  const t = d.track_record;
+  if (!t) { $("track").innerHTML = '<div class="card empty">Starts once the first day of live projections has been graded.</div>'; return; }
+  const rec = (o) => `${o.w}–${o.l}${o.w + o.l ? ` (${pct(o.w / (o.w + o.l))})` : ""}`;
+  $("track").innerHTML = `<div class="tiles" style="margin-top:0">
+    <div class="card tile"><div class="v">${t.games}</div><div class="k">games graded since ${esc(t.since)}</div></div>
+    <div class="card tile"><div class="v">${t.mae_model} / ${t.mae_market ?? "—"}</div><div class="k">avg miss: model / market (pts)</div></div>
+    <div class="card tile"><div class="v">${rec(t.leans)}</div><div class="k">model lean vs market line (52.4% breaks even at −110)</div></div>
+    <div class="card tile"><div class="v">${rec(t.big_gap_leans)}</div><div class="k">leans with a 6+ point gap</div></div></div>`;
+}
+
+function renderRatings(d) {
+  $("ratings").innerHTML = `<table><thead><tr><th>Team</th><th class="num">Net</th><th class="num">Offense</th><th class="num">Defense</th><th class="num">Pace</th><th class="num">Off. recent</th><th class="num">Def. recent</th><th class="num">GP</th></tr></thead><tbody>` +
+    d.team_ratings.map(t => `<tr><td>${esc(t.team)}</td><td class="num"><b>${sgn(t.net)}</b></td><td class="num">${sgn(t.off)}</td><td class="num">${sgn(t.de)}</td><td class="num">${sgn(t.pace)}</td><td class="num">${sgn(t.off_recent)}</td><td class="num">${sgn(t.de_recent)}</td><td class="num">${t.gp}</td></tr>`).join("") +
+    `</tbody></table><div class="sub" style="margin-top:6px">Points per 100 possessions vs league average, adjusted for opponents. Defense: negative = allows fewer points (better). Pace: possessions per 48 minutes vs average.</div>`;
+}
+
+load().catch(e => { $("stamp").textContent = "Couldn't load data: " + e; });
+</script>
+</body>
+</html>
