@@ -130,7 +130,13 @@ def main() -> None:
     inj = pd.DataFrame(columns=injuries.COLS)
     if not args.no_injuries:
         inj_raw: list = []
-        inj = injuries.fetch(today, inj_raw)
+        roster = None
+        if v2_ok:
+            roster = pd.DataFrame([dict(athlete_id=int(k), name=v, team=mv2.av.team_of.get(k))
+                                   for k, v in mv2.av.names.items() if v and mv2.av.team_of.get(k)])
+        inj = injuries.fetch(today, inj_raw, roster)
+        if len(inj):
+            log.info("injuries: using %s (%d rows, %d teams)", inj.source.iloc[0], len(inj), inj.team.nunique())
         if inj_raw:
             (dbg / "injuries_raw.json").write_text(json.dumps(inj_raw, default=str)[:400000])
     sp_path = Path(__file__).with_name("status_probs.json")
@@ -305,8 +311,10 @@ def main() -> None:
             if gid not in finals.index or s.get("proj") is None:
                 continue
             tot = float(finals.loc[gid, "total"])
+            fs = s.get("first_seen") or {}
             graded.append(dict(date=f.stem, total=tot, proj=s["proj"], mkt=s.get("market_total"),
-                               lean=s.get("lean"), gap=s.get("gap")))
+                               lean=s.get("lean"), gap=s.get("gap"),
+                               open_mkt=fs.get("market_total"), open_lean=fs.get("lean"), open_gap=fs.get("gap")))
     track = None
     if graded:
         gd = pd.DataFrame(graded)
@@ -320,6 +328,18 @@ def main() -> None:
                      mae_market=_r((wl.total - wl.mkt).abs().mean(), 2) if len(wl) else None,
                      leans=dict(w=int(won.sum()), l=int((~won).sum())),
                      big_gap_leans=dict(w=int(bigwon.sum()), l=int((~bigwon).sum())))
+        # opening-line forward test: |morning projection - first line we saw| >= 6, graded vs that line,
+        # and closing-line value = how far the last pre-tip line moved toward the lean (points)
+        op = gd.dropna(subset=["open_mkt", "open_gap"])
+        op = op[op.open_gap.abs() >= 6]
+        if len(op):
+            sgn = np.where(op.open_lean == "OVER", 1.0, -1.0)
+            res = np.sign(op.total - op.open_mkt) * sgn
+            clv = (op.mkt - op.open_mkt) * sgn
+            track["opener_test"] = dict(
+                flagged=int(len(op)), w=int((res > 0).sum()), l=int((res < 0).sum()), push=int((res == 0).sum()),
+                avg_clv=_r(np.nanmean(clv), 2) if clv.notna().any() else None,
+                beat_close=int((clv > 0).sum()), lost_close=int((clv < 0).sum()))
 
     # ---------------- team ratings ----------------
     tr = []

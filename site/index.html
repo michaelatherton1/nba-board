@@ -301,7 +301,9 @@ function renderTrack(d) {
     <div class="card tile"><div class="v">${t.games}</div><div class="k">games graded since ${esc(t.since)}</div></div>
     <div class="card tile"><div class="v">${t.mae_model} / ${t.mae_market ?? "—"}</div><div class="k">avg miss: model / market (pts)</div></div>
     <div class="card tile"><div class="v">${rec(t.leans)}</div><div class="k">model lean vs market line (52.4% breaks even at −110)</div></div>
-    <div class="card tile"><div class="v">${rec(t.big_gap_leans)}</div><div class="k">leans with a 6+ point gap</div></div></div>`;
+    <div class="card tile"><div class="v">${rec(t.big_gap_leans)}</div><div class="k">leans with a 6+ point gap</div></div>
+    ${t.opener_test ? `<div class="card tile"><div class="v">${rec(t.opener_test)}</div><div class="k">opening-line test: ${t.opener_test.flagged} flagged (6+ pts vs first line seen), graded at that line</div></div>
+    <div class="card tile"><div class="v">${t.opener_test.avg_clv == null ? "—" : sgn(t.opener_test.avg_clv)}</div><div class="k">opening-line test: avg line move toward the lean by tip (pts); beat close ${t.opener_test.beat_close}, lost ${t.opener_test.lost_close}</div></div>` : ""}</div>`;
 }
 
 function renderRatings(d) {

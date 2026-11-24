@@ -23,6 +23,7 @@ Each run commits a small snapshot to `data/history/` (the pre-game projection an
 | Box scores and schedules, 2014-15 to today | ESPN via [sportsdataverse](https://github.com/sportsdataverse/sportsdataverse-data) releases | `nbadash/model.py` |
 | Last night's games if the release hasn't caught up | ESPN public site API | `nbadash/espn.py` |
 | Team ratings and projections | ratings updated after every game; ridge correction for rest, back-to-backs, altitude and recent form | `nbadash/model.py` |
+| Injury report | official NBA injury report PDF (latest before each run; ESPN injuries as fallback), names matched to ESPN ids; P(plays) by status and by games missed in `status_probs.json` | `nbadash/injuries.py`, `nbadash/injuries_live.py` |
 | Kalshi prices | `KXNBAGAME`, `KXNBASPREAD`, `KXNBATOTAL` series, public order books | `nbadash/venues.py` |
 | Polymarket US prices | `gateway.polymarket.us` NBA league events | `nbadash/venues.py` |
 | Novig prices | `api.novig.com` public catalog and books | `nbadash/venues.py` |
@@ -33,8 +34,13 @@ Fees modelled (taker, per $1 contract at price p): Kalshi `0.07 × p × (1−p) 
 
 ## Read before trading
 
-- **The model has no injury data.** A gap of 6+ points to the market usually means the market knows something.
-- **The edge has faded.** In the walk-forward backtest, 6+ point gaps hit 57% from 2016-17 to 2021-22 but 49.5% over the last four seasons (break-even is 52.4% at −110). Average miss: model 14.7 points, market 14.4.
+- **No edge against the closing line.** Graded against true closing totals (2016-17 to 2025-26), the model's
+  gap to the line carries almost no information (calibration slope about 0 with morning-of availability,
+  +0.06 to +0.15 with the official injury report). The page's lean probabilities shrink toward the line accordingly.
+- **Opening lines are the open question.** Against the first available total, 6+ point gaps hit 58% (2016-22) and
+  66% (2022-25) but 50% in 2025-26. The board records the first line it sees and the last line before tip for every
+  game, and the track record grades the 6+ gap flags at the first line plus how far the line moved toward the lean
+  (closing-line value). Treat it as a small-stakes forward test.
 - **Arbitrage windows are short.** Snapshots twice a day mostly miss the fast ones. Anything over 5¢ per pair is usually a rules mismatch or a stale quote. Read both rulebooks before trading, and note that whole-number lines are left out because venues settle pushes differently.
 - Not financial advice.
 

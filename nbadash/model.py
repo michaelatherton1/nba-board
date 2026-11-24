@@ -41,8 +41,8 @@ CALIBRATION = dict(
     # Share of a model-vs-CLOSING-line gap that shows up in results (walk-forward, true closing lines).
     # v2 morning-of: +0.05 (2016-25), 0.00 (2025-26) -> no edge vs the close.
     beta_morning=0.0,
-    # v2 with an injury report: provisional. Knowing actual lineups gives +0.18..+0.25; a real report
-    # captures only part of that. Replaced when the injury lane's backtest is folded in.
+    # v2 with the official injury report (backtest on archived reports, true closing lines):
+    # +0.15 (2022-23..24-25), +0.06 (2025-26). Small and not stable -> 0.10, i.e. lean mostly on the line.
     beta_report=0.10,
     # vs the OPENING line the morning model's beta is +0.45..+0.68 (lines move toward it by the close);
     # the opening-line forward test tracks that via first_seen / closing-line value, not p_over.

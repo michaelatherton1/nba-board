@@ -41,7 +41,9 @@ jobs:
           restore-keys: nba-raw-
 
       - name: Unit tests
-        run: PYTHONPATH=. python tests/test_venues.py
+        run: |
+          PYTHONPATH=. python tests/test_venues.py
+          python tests/test_injuries_live.py
 
       - name: Build today's board
         run: python -m nbadash.run

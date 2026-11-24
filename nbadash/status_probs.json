@@ -1,0 +1,18 @@
+{
+ "note": "P(player appears | report status), rotation players (role >= 10 min), running counts over all earlier report games (pseudo-count 10 prior). 'p' = pre-tip snapshot (latest report >= 60 min before tip) through the end of the data; use it live. 'by_snapshot' adds the 5:30 PM ET ('eve') and 1:30 PM ET ('mor') tables. 'walk_forward' = the table in force at the start of each ESPN season (what the evaluation used). not_listed_by_missed = P(play) for rotation players NOT on a submitted report, by consecutive team games missed before today: buckets 0,1,2,3-4,5-9,10+.",
+ "p": {
+  "Out": 0.0008095372346852472,
+  "Doubtful": 0.02640845070422535,
+  "Questionable": 0.5420024285241196,
+  "Probable": 0.9251366120218579,
+  "Available": 0.8848214285714285
+ },
+ "p_not_listed_by_missed": {
+  "0": 0.9457799723197612,
+  "1": 0.54884732492388,
+  "2": 0.3768925739005047,
+  "3-4": 0.2394807520143241,
+  "5-9": 0.09522949042284062,
+  "10+": 0.012350998132988655
+ }
+}
