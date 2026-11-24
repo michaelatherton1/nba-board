@@ -161,6 +161,9 @@ def main() -> None:
             proj_report=_r(getattr(r, "proj_report", None)), model_used=getattr(r, "model_used", "v1"),
             absences_h=getattr(r, "absences_h", None) or [], absences_a=getattr(r, "absences_a", None) or []))
     games_by_id = {g["game_id"]: g for g in slate}
+    for g in slate:
+        log.info("slate %s %s@%s v1=%s v2=%s used=%s out/q=%s", g["date"], g["away_abbr"], g["home_abbr"], g["proj_v1"],
+                 g["proj"], g["model_used"], [a["name"] + ":" + a["status"] for a in g["absences_a"] + g["absences_h"]][:6])
 
     # ---------------- venues ----------------
     venue_status, quotes = {}, []
