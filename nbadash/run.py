@@ -137,9 +137,28 @@ def main() -> None:
         results = [venues.fetch_kalshi(), venues.fetch_pmus(), venues.fetch_novig()]
         venues.dump_raw(results, dbg / "venues_raw.json")
         open_slate = [g for g in slate if not g["started"]]
+        slate_pairs = {frozenset((g["home"], g["away"])) for g in open_slate}
         for res in results:
             assigned = venues.assign(res.quotes, open_slate)
             quotes.extend(assigned)
+            # diagnostics for the log: unmatched quotes by date and whether the matchup is on the slate
+            um = [q for q in res.quotes if q.game_id is None]
+            summ = {}
+            for q in um:
+                d = datetime.fromtimestamp(q.start, timezone.utc).astimezone(ET).date().isoformat() if q.start else "no-start"
+                key = (d, "pair-on-slate" if frozenset(q.teams) in slate_pairs else "pair-not-on-slate")
+                summ[key] = summ.get(key, 0) + 1
+            log.info("%s unmatched quotes by (ET date, pair): %s", res.name, dict(sorted(summ.items())[:12]))
+            if res.name == "Polymarket US":
+                for ev in res.raw_samples[:2]:
+                    ms = ev.get("markets") or []
+                    log.info("PMUS sample event: title=%r start=%r keys=%s nmarkets=%d", ev.get("title"),
+                             ev.get("startTime") or ev.get("eventDate"), sorted(ev.keys())[:25], len(ms))
+                    for m_ in ms[:4]:
+                        log.info("  market: type=%r smt=%r line=%r q=%r sides=%s bid=%r ask=%r", m_.get("marketType"),
+                                 m_.get("sportsMarketType"), m_.get("line"), (m_.get("question") or "")[:60],
+                                 [(s.get("long"), s.get("description"), (s.get("team") or {}).get("name"))
+                                  for s in m_.get("marketSides") or []], m_.get("bestBidQuote"), m_.get("bestAskQuote"))
             venue_status[res.name] = dict(ok=res.ok, error=res.error, markets_seen=res.markets_seen,
                                           quotes=len(res.quotes), matched=len(assigned), skipped=res.skipped)
             log.info("%s: ok=%s markets=%d quotes=%d matched=%d skipped=%d %s", res.name, res.ok,
