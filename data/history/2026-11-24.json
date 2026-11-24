@@ -8,21 +8,21 @@
    "proj_morning": 213.6,
    "proj_report": 213.2,
    "model_used": "v2 + injury report",
-   "market_total": 212.5,
+   "market_total": 213.5,
    "venue_main_totals": {
     "Kalshi": 212.5,
     "Polymarket US": 212.5,
-    "Novig": 212.5
+    "Novig": 213.5
    },
-   "lean": "OVER",
-   "gap": 0.7,
+   "lean": "UNDER",
+   "gap": -0.3,
    "absences": [
     "Paolo Banchero",
     "Duncan Robinson",
     "Jalen Duren",
     "Taurean Prince"
    ],
-   "captured_at": "2026-11-24T14:26+00:00",
+   "captured_at": "2026-11-24T16:31+00:00",
    "first_seen": {
     "time": "2026-11-24T05:12+00:00",
     "market_total": 213.5,
@@ -58,7 +58,7 @@
     "Tristan Vukcevic",
     "Mitchell Robinson"
    ],
-   "captured_at": "2026-11-24T14:26+00:00",
+   "captured_at": "2026-11-24T16:31+00:00",
    "first_seen": {
     "time": "2026-11-24T05:12+00:00",
     "market_total": 217.5,
@@ -91,7 +91,7 @@
     "P.J. Washington",
     "Dereck Lively II"
    ],
-   "captured_at": "2026-11-24T14:26+00:00",
+   "captured_at": "2026-11-24T16:31+00:00",
    "first_seen": {
     "time": "2026-11-24T05:12+00:00",
     "market_total": 231.5,
@@ -106,5 +106,5 @@
    }
   }
  },
- "updated": "2026-11-24T14:26+00:00"
+ "updated": "2026-11-24T16:31+00:00"
 }
