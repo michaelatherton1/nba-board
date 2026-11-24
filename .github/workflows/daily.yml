@@ -48,6 +48,10 @@ jobs:
       - name: Build today's board
         run: python -m nbadash.run
 
+      - name: Refresh tables for the Excel workbook's Update button
+        continue-on-error: true
+        run: python -m nbadash.workbook_feed --out site/wb
+
       - name: Keep raw API samples for debugging
         if: always()
         uses: actions/upload-artifact@v4
@@ -61,7 +65,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/history
+          git add data/history site/wb
           if ! git diff --cached --quiet; then
             git commit -m "Snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
             git pull --rebase --autostash
