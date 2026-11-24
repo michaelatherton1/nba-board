@@ -2,10 +2,11 @@ name: Daily NBA board
 
 on:
   schedule:
-    # GitHub cron is UTC. 15:23 UTC = 9:23 AM CT (10:23 during daylight time).
-    - cron: "23 15 * * *"
-    # 22:47 UTC = 4:47 PM CT (5:47 during daylight time): fresh lines before tip-off.
-    - cron: "47 22 * * *"
+    # GitHub cron is UTC (CT = UTC-6 in winter, UTC-5 in summer).
+    - cron: "37 12 * * *"   # 6:37 AM CT: earliest prices (opening-line forward test)
+    - cron: "23 15 * * *"   # 9:23 AM CT: morning board
+    - cron: "47 22 * * *"   # 4:47 PM CT: afternoon injury reports + lines
+    - cron: "41 0 * * *"    # 6:41 PM CT: final reports before the late tips
   workflow_dispatch: {}
 
 permissions:

@@ -116,7 +116,8 @@ footer li { margin-bottom: 4px; }
   <footer>
     <ul>
       <li><b>Model:</b> opponent-adjusted pace and efficiency ratings plus a correction layer for rest, back-to-backs, altitude and form. Walk-forward backtest 2016-17 to 2025-26: average miss 14.7 points vs the market line's 14.4.</li>
-      <li><b>Edge has faded:</b> gaps of 6+ points vs the line hit 57% through 2021-22 but 49.5% over the last four seasons. Treat the lean as a second opinion, not a bet signal.</li>
+      <li><b>Model v2</b> (Nov 2026): better team ratings (shooting luck discounted), a home-arena effect, and player availability. Morning-of version by default; when an injury report is available it uses the report. Walk-forward 2025-26: average miss 14.74 points (old model 14.85, closing line 14.51).</li>
+      <li><b>No edge vs the closing line:</b> against true closing totals the model has been about 50% in every season tested. Against <i>opening</i> totals its 6+ point gaps hit 58-66% from 2016-17 to 2024-25 (lines then moved toward it), but 2025-26 went 61-62, so the opening-line rule is a small-stakes forward test, judged by line movement.</li>
       <li><b>No injury data.</b> A big gap often means the market knows about an injury the model doesn't.</li>
       <li><b>Prices</b> are taker asks for one $1 contract, with each venue's taker fee added (Kalshi 0.07·p·(1−p) × series multiplier; Polymarket US its fee coefficient · p·(1−p); Novig charges nothing before tip-off). Odds shown are American odds equivalent after fees. Lines move fast, so check the venue before trading.</li>
       <li><b>Arbitrage</b> pairs buy both sides of the same proposition on different venues. Whole-number lines are left out (venues settle pushes differently). Read both rulebooks before trading; edges over 5¢ are usually a rules mismatch or a stale quote.</li>
@@ -257,6 +258,8 @@ function renderGames(d) {
         ${mv ? `<span>Gap <b>${sgn(mv.gap)}</b></span><span class="lean-${esc(mv.lean)}">Lean ${esc(mv.lean)} · ${pct(mv.p_lean)}</span>
           ${mv.best_price ? `<span class="sub">best ${esc(mv.lean.toLowerCase())} ${cents(mv.best_price.eff)} on ${esc(mv.best_price.venue)} · EV ${pct(mv.ev)}</span>` : ""}` : '<span class="sub">no market line matched yet</span>'}
       </div>
+      <div class="sub" style="margin-top:4px">Model: ${esc(g.model_used || "v1")}${g.proj_v1 != null ? ` · old model ${f1(g.proj_v1)}` : ""}${(g.absences_a.length || g.absences_h.length) ? " · " + [...g.absences_a.map(a => `${esc(g.away_abbr)} ${esc(a.name)} (${esc(a.status)})`), ...g.absences_h.map(a => `${esc(g.home_abbr)} ${esc(a.name)} (${esc(a.status)})`)].join(", ") : ""}</div>
+      ${g.first_seen && g.first_seen.gap != null && Math.abs(g.first_seen.gap) >= 6 ? `<div class="flag">Opening-line test: morning model ${f1(g.first_seen.proj_morning)} vs first line seen ${f1(g.first_seen.market_total)} (${esc(g.first_seen.time.slice(11,16))} UTC) → ${esc(g.first_seen.lean)} ${sgn(g.first_seen.gap)}. Forward test only: judge it by whether the line moves toward the model.</div>` : ""}
       <div class="sub" style="margin-top:4px">Exp. pace ${f1(g.exp_pace)} · ${esc(g.away_abbr)} ${f1(g.exp_ortg_a)} / ${esc(g.home_abbr)} ${f1(g.exp_ortg_h)} pts per 100 · ${esc(g.away_abbr)} ${rest(g.a_rest, g.a_b2b)}, ${esc(g.home_abbr)} ${rest(g.h_rest, g.h_b2b)}</div>
       ${mv && mv.big_gap ? '<div class="flag">Gap of 6+ points: check injury news before trusting the model.</div>' : ""}
       ${(ml.length || (L.totals || []).length || (L.spreads || []).length) ? `<details><summary>Best lines across venues</summary>

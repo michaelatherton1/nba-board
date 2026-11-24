@@ -38,10 +38,16 @@ RATING_PARAMS = dict(alpha_min=1 / 22, prior_games=10, carry=0.55,
 
 # From the walk-forward backtest (11,987 games with lines, 2016-17 to 2025-26).
 CALIBRATION = dict(
-    beta_all=0.18,          # share of a model-vs-line gap that showed up in results
-    beta_recent=-0.07,      # same, 2022-23 to 2025-26 only: no edge
-    sigma=18.2,             # SD of (actual - line) after the beta adjustment
-    model_mae=14.68, line_mae=14.43, games=11987,
+    # Share of a model-vs-CLOSING-line gap that shows up in results (walk-forward, true closing lines).
+    # v2 morning-of: +0.05 (2016-25), 0.00 (2025-26) -> no edge vs the close.
+    beta_morning=0.0,
+    # v2 with an injury report: provisional. Knowing actual lineups gives +0.18..+0.25; a real report
+    # captures only part of that. Replaced when the injury lane's backtest is folded in.
+    beta_report=0.10,
+    # vs the OPENING line the morning model's beta is +0.45..+0.68 (lines move toward it by the close);
+    # the opening-line forward test tracks that via first_seen / closing-line value, not p_over.
+    sigma=18.2,
+    model_mae=14.74, line_mae=14.51, games=1251,
 )
 
 BOX_KEEP = ["field_goals_made", "field_goals_attempted", "three_point_field_goals_made",
@@ -278,7 +284,7 @@ def upcoming_frame(sched: pd.DataFrame, teams: dict, L: dict, season: int,
     return add_rest(add_structural(pd.DataFrame(rows)), sched)
 
 
-def p_over(proj: float, line: float, beta: float = CALIBRATION["beta_all"],
+def p_over(proj: float, line: float, beta: float = CALIBRATION["beta_morning"],
            sigma: float = CALIBRATION["sigma"]) -> float:
     """Calibrated chance the game goes over ``line`` given the model's projection."""
     from math import erf, sqrt

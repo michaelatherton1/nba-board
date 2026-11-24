@@ -295,17 +295,16 @@ def fetch_pmus() -> VenueResult:
             # The league endpoint returns only the main market; pull the game's full moneyline/spread/total set.
             mkts = {m.get("slug") or m.get("id"): m for m in ev.get("markets") or []}
             st = _ts(ev.get("startTime")) or _ts(ev.get("eventDate"))
-            gid = ev.get("gameId")
-            if gid and st and -6 * 3600 < st - now < 60 * 3600:
+            eid = ev.get("id")
+            if eid and st and -6 * 3600 < st - now < 60 * 3600:
                 try:
-                    params = [("gameId", str(gid)), ("active", "true"), ("closed", "false"), ("limit", "500")]
-                    params += [("sportsMarketTypes", t) for t in ("SPORTS_MARKET_TYPE_MONEYLINE",
-                                                                  "SPORTS_MARKET_TYPE_SPREAD",
-                                                                  "SPORTS_MARKET_TYPE_TOTAL")]
-                    for m in api.get("/v1/markets", params).get("markets") or []:
-                        mkts.setdefault(m.get("slug") or m.get("id"), m)
+                    d = api.get(f"/v1/events/{eid}")
+                    full = (d.get("event") or d) if isinstance(d, dict) else {}
+                    for m in full.get("markets") or []:
+                        if (m.get("sportsMarketType") or "").startswith("basketball_team_full_game_"):
+                            mkts.setdefault(m.get("slug") or m.get("id"), m)
                 except Exception as e:
-                    log.warning("PM US markets for game %s: %s", gid, e)
+                    log.warning("PM US event %s: %s", eid, e)
             if len(res.raw_samples) < 4 and len(mkts) > 1:
                 res.raw_samples.append({"title": ev.get("title"), "startTime": ev.get("startTime"),
                                         "markets": list(mkts.values())[:6]})
@@ -343,6 +342,8 @@ def _pm_quotes(ev: dict, m: dict) -> list[Quote]:
         return []
     kind_raw = (m.get("marketType") or m.get("sportsMarketType") or "").lower()
     smt = (m.get("sportsMarketType") or "").lower()
+    if smt and smt.startswith("basketball_") and not smt.startswith("basketball_team_full_game_"):
+        return []
     if "first" in smt or "half" in smt or "1h" in smt or "quarter" in smt or "team_total" in smt or "player" in smt:
         return []
     if kind_raw.startswith("moneyline"):

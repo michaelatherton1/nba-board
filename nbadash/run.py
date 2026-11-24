@@ -86,6 +86,7 @@ def main() -> None:
     ap.add_argument("--no-download", action="store_true")
     ap.add_argument("--no-venues", action="store_true")
     ap.add_argument("--no-espn", action="store_true")
+    ap.add_argument("--no-injuries", action="store_true")
     args = ap.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
@@ -115,9 +116,36 @@ def main() -> None:
     m = model.fit(train)
     rated["proj"] = model.predict(m, rated)
 
+    # model v2 (component ratings + arena effect + player availability); falls back to v1 on any failure
+    from . import injuries, v2
+    mv2, v2_ok = v2.ModelV2(data_dir, season), False
+    try:
+        dv2 = mv2.build(games, rated)
+        rated = rated.merge(dv2[["game_id", "proj_v2"]], on="game_id", how="left")
+        rated["proj"] = rated["proj_v2"].fillna(rated["proj"])
+        v2_ok = True
+    except Exception as e:  # keep the board running on v1
+        log.exception("model v2 failed, using v1: %s", e)
+
+    inj = pd.DataFrame(columns=injuries.COLS)
+    if not args.no_injuries:
+        inj_raw: list = []
+        inj = injuries.fetch(today, inj_raw)
+        if inj_raw:
+            (dbg / "injuries_raw.json").write_text(json.dumps(inj_raw, default=str)[:400000])
+    sp_path = Path(__file__).with_name("status_probs.json")
+    status_p = json.loads(sp_path.read_text()) if sp_path.exists() else None
+
     slate_df = model.upcoming_frame(sched, teams_state, L, season, today, 2)
     if not slate_df.empty:
-        slate_df["proj"] = model.predict(m, slate_df)
+        slate_df["proj_v1"] = model.predict(m, slate_df)
+        slate_df["proj"] = slate_df["proj_v1"]
+        slate_df["model_used"] = "v1"
+        if v2_ok:
+            try:
+                slate_df = mv2.project(slate_df, inj, status_p)
+            except Exception as e:
+                log.exception("model v2 projection failed, using v1: %s", e)
         slate_df = slate_df.sort_values("tip")
     slate = []
     for r in slate_df.itertuples(index=False):
@@ -128,7 +156,10 @@ def main() -> None:
             home_abbr=ABBR[r.home], away_abbr=ABBR[r.away],
             proj=_r(r.proj), struct_total=_r(r.struct_total), exp_pace=_r(r.exp_pace),
             exp_ortg_h=_r(r.exp_ortg_h), exp_ortg_a=_r(r.exp_ortg_a),
-            h_rest=int(r.h_rest), a_rest=int(r.a_rest), h_b2b=bool(r.h_b2b), a_b2b=bool(r.a_b2b)))
+            h_rest=int(r.h_rest), a_rest=int(r.a_rest), h_b2b=bool(r.h_b2b), a_b2b=bool(r.a_b2b),
+            proj_v1=_r(getattr(r, "proj_v1", None)), proj_morning=_r(getattr(r, "proj_morning", None)),
+            proj_report=_r(getattr(r, "proj_report", None)), model_used=getattr(r, "model_used", "v1"),
+            absences_h=getattr(r, "absences_h", None) or [], absences_a=getattr(r, "absences_a", None) or []))
     games_by_id = {g["game_id"]: g for g in slate}
 
     # ---------------- venues ----------------
@@ -191,7 +222,8 @@ def main() -> None:
         g["market_total"] = mt
         if mt is not None and g["proj"] is not None:
             gap = g["proj"] - mt
-            p_o = model.p_over(g["proj"], mt)
+            beta = cal["beta_report"] if g["model_used"] == "v2 + injury report" else cal["beta_morning"]
+            p_o = model.p_over(g["proj"], mt, beta=beta)
             lean = "OVER" if gap > 0 else "UNDER" if gap < 0 else "PASS"
             row = next((t for t in gl["totals"] if t["line"] == mt), None)
             bestq = (row or {}).get("yes" if lean == "OVER" else "no")
@@ -213,11 +245,24 @@ def main() -> None:
         prev = snap["games"].get(key)
         if g["started"] and prev:
             continue    # don't overwrite pre-game numbers with in-game ones
-        snap["games"][key] = dict(
-            away=g["away"], home=g["home"], proj=g["proj"], market_total=g["market_total"],
+        entry = dict(
+            away=g["away"], home=g["home"], proj=g["proj"], proj_morning=g["proj_morning"],
+            proj_report=g["proj_report"], model_used=g["model_used"], market_total=g["market_total"],
             venue_main_totals=g["lines"]["venue_main_totals"],
             lean=(g["model_vs_market"] or {}).get("lean"), gap=(g["model_vs_market"] or {}).get("gap"),
+            absences=[a["name"] for a in g["absences_h"] + g["absences_a"]],
             captured_at=now.isoformat(timespec="minutes"))
+        # opening-line forward test: keep the FIRST market line we saw and the morning projection then
+        first = (prev or {}).get("first_seen")
+        if first is None and g["market_total"] is not None:
+            pm = g["proj_morning"] if g["proj_morning"] is not None else g["proj"]
+            first = dict(time=now.isoformat(timespec="minutes"), market_total=g["market_total"],
+                         venue_main_totals=g["lines"]["venue_main_totals"], proj_morning=pm,
+                         lean=("OVER" if pm > g["market_total"] else "UNDER") if pm is not None else None,
+                         gap=_r(pm - g["market_total"]) if pm is not None else None)
+        entry["first_seen"] = first
+        snap["games"][key] = entry
+        g["first_seen"] = first
     snap["updated"] = now.isoformat(timespec="minutes")
     snap_path.write_text(json.dumps(snap, indent=1))
 
