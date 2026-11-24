@@ -149,6 +149,18 @@ def main() -> None:
                 key = (d, "pair-on-slate" if frozenset(q.teams) in slate_pairs else "pair-not-on-slate")
                 summ[key] = summ.get(key, 0) + 1
             log.info("%s unmatched quotes by (ET date, pair): %s", res.name, dict(sorted(summ.items())[:12]))
+            seen = set()
+            for q in um:
+                key = (q.teams, q.start)
+                if key in seen or len(seen) >= 6:
+                    continue
+                seen.add(key)
+                d = datetime.fromtimestamp(q.start, timezone.utc).isoformat() if q.start else None
+                log.info("  unmatched %s: teams=%s start=%s market=%s id=%s", res.name, q.teams, d, q.market, q.market_id)
+            if res.name == "Kalshi":
+                log.info("  slate: %s", [(g["date"], g["away_abbr"], g["home_abbr"], g["started"]) for g in slate])
+            if res.name == "Polymarket US":
+                log.info("  PMUS marketCounts sample: %s", [ev.get("marketCounts") for ev in res.raw_samples[:2]])
             if res.name == "Polymarket US":
                 for ev in res.raw_samples[:2]:
                     ms = ev.get("markets") or []
