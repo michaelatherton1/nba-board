@@ -157,8 +157,8 @@ async function load() {
   $("tiles").innerHTML = [
     [todays.length, "games today"],
     [d.arbs.length, "arbitrage pairs found"],
-    [t ? `${t.mae_model}` : "—", t ? `model avg miss (pts), ${t.games} games` : "track record starts tomorrow"],
-    [t && t.mae_market != null ? `${t.mae_market}` : "—", "market avg miss (pts)"],
+    [t ? `${t.mae_model_lined ?? t.mae_model}` : "—", t ? `model avg miss (pts), ${t.games_with_line ?? t.games} games` : "track record starts tomorrow"],
+    [t && t.mae_market != null ? `${t.mae_market}` : "—", t ? `market avg miss (pts), same ${t.games_with_line ?? ""} games` : "market avg miss (pts)"],
   ].map(([v, k]) => `<div class="card tile"><div class="v">${esc(v)}</div><div class="k">${esc(k)}</div></div>`).join("");
 
   renderArbs(d);
@@ -299,7 +299,7 @@ function renderTrack(d) {
   const rec = (o) => `${o.w}–${o.l}${o.w + o.l ? ` (${pct(o.w / (o.w + o.l))})` : ""}`;
   $("track").innerHTML = `<div class="tiles" style="margin-top:0">
     <div class="card tile"><div class="v">${t.games}</div><div class="k">games graded since ${esc(t.since)}</div></div>
-    <div class="card tile"><div class="v">${t.mae_model} / ${t.mae_market ?? "—"}</div><div class="k">avg miss: model / market (pts)</div></div>
+    <div class="card tile"><div class="v">${t.mae_model_lined ?? t.mae_model} / ${t.mae_market ?? "—"}</div><div class="k">avg miss: model / market (pts), on the ${t.games_with_line ?? t.games} games with a market line${t.games_with_line != null && t.games_with_line < t.games ? `; model on all ${t.games}: ${t.mae_model}` : ""}</div></div>
     <div class="card tile"><div class="v">${rec(t.leans)}</div><div class="k">model lean vs market line (52.4% breaks even at −110)</div></div>
     <div class="card tile"><div class="v">${rec(t.big_gap_leans)}</div><div class="k">leans with a 6+ point gap</div></div>
     ${t.opener_test ? `<div class="card tile"><div class="v">${rec(t.opener_test)}</div><div class="k">opening-line test: ${t.opener_test.flagged} flagged (6+ pts vs first line seen), graded at that line</div></div>

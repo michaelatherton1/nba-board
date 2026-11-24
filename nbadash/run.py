@@ -318,14 +318,15 @@ def main() -> None:
     track = None
     if graded:
         gd = pd.DataFrame(graded)
-        wl = gd.dropna(subset=["mkt"])
-        wl = wl[wl.total != wl.mkt]
+        wm = gd.dropna(subset=["mkt"])          # games with a market total: model vs market on the same games
+        wl = wm[wm.total != wm.mkt]             # pushes excluded only from win-loss records
         won = ((wl.total > wl.mkt) == (wl.lean == "OVER"))
         big = wl[wl.gap.abs() >= 6]
         bigwon = ((big.total > big.mkt) == (big.lean == "OVER"))
-        track = dict(games=len(gd), since=gd.date.min(),
+        track = dict(games=len(gd), since=gd.date.min(), games_with_line=len(wm),
                      mae_model=_r((gd.total - gd.proj).abs().mean(), 2),
-                     mae_market=_r((wl.total - wl.mkt).abs().mean(), 2) if len(wl) else None,
+                     mae_model_lined=_r((wm.total - wm.proj).abs().mean(), 2) if len(wm) else None,
+                     mae_market=_r((wm.total - wm.mkt).abs().mean(), 2) if len(wm) else None,
                      leans=dict(w=int(won.sum()), l=int((~won).sum())),
                      big_gap_leans=dict(w=int(bigwon.sum()), l=int((~bigwon).sum())))
         # opening-line forward test: |morning projection - first line we saw| >= 6, graded vs that line,
