@@ -1,0 +1,276 @@
+{
+ "date": "2026-11-25",
+ "games": {
+  "401909317": {
+   "away": "Miami Heat",
+   "home": "Philadelphia 76ers",
+   "proj": 239.6,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 237.5,
+   "venue_main_totals": {
+    "Kalshi": 238.5,
+    "Novig": 237.5,
+    "Polymarket US": 237.5
+   },
+   "lean": "OVER",
+   "gap": 2.1,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 237.5,
+    "venue_main_totals": {
+     "Kalshi": 238.5,
+     "Novig": 237.5,
+     "Polymarket US": 237.5
+    },
+    "proj_morning": 239.6,
+    "lean": "OVER",
+    "gap": 2.1
+   }
+  },
+  "401909318": {
+   "away": "Chicago Bulls",
+   "home": "Charlotte Hornets",
+   "proj": 223.5,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 221.5,
+   "venue_main_totals": {
+    "Kalshi": 222.5,
+    "Novig": 221.5,
+    "Polymarket US": 221.5
+   },
+   "lean": "OVER",
+   "gap": 2.0,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 221.5,
+    "venue_main_totals": {
+     "Kalshi": 222.5,
+     "Novig": 221.5,
+     "Polymarket US": 221.5
+    },
+    "proj_morning": 223.5,
+    "lean": "OVER",
+    "gap": 2.0
+   }
+  },
+  "401909319": {
+   "away": "Cleveland Cavaliers",
+   "home": "New York Knicks",
+   "proj": 218.8,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 218.5,
+   "venue_main_totals": {
+    "Kalshi": 218.5,
+    "Polymarket US": 218.5,
+    "Novig": 218.5
+   },
+   "lean": "OVER",
+   "gap": 0.3,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 218.5,
+    "venue_main_totals": {
+     "Kalshi": 218.5,
+     "Polymarket US": 218.5,
+     "Novig": 218.5
+    },
+    "proj_morning": 218.8,
+    "lean": "OVER",
+    "gap": 0.3
+   }
+  },
+  "401909320": {
+   "away": "Minnesota Timberwolves",
+   "home": "Oklahoma City Thunder",
+   "proj": 223.6,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 222.5,
+   "venue_main_totals": {
+    "Kalshi": 222.5,
+    "Polymarket US": 222.5,
+    "Novig": 222.5
+   },
+   "lean": "OVER",
+   "gap": 1.1,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 222.5,
+    "venue_main_totals": {
+     "Kalshi": 222.5,
+     "Polymarket US": 222.5,
+     "Novig": 222.5
+    },
+    "proj_morning": 223.6,
+    "lean": "OVER",
+    "gap": 1.1
+   }
+  },
+  "401909321": {
+   "away": "LA Clippers",
+   "home": "Memphis Grizzlies",
+   "proj": 229.2,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 228.5,
+   "venue_main_totals": {
+    "Kalshi": 228.5,
+    "Novig": 228.5,
+    "Polymarket US": 227.5
+   },
+   "lean": "OVER",
+   "gap": 0.7,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 228.5,
+    "venue_main_totals": {
+     "Kalshi": 228.5,
+     "Novig": 228.5,
+     "Polymarket US": 227.5
+    },
+    "proj_morning": 229.2,
+    "lean": "OVER",
+    "gap": 0.7
+   }
+  },
+  "401909322": {
+   "away": "Brooklyn Nets",
+   "home": "Milwaukee Bucks",
+   "proj": 231.9,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 232.5,
+   "venue_main_totals": {
+    "Kalshi": 233.5,
+    "Novig": 232.5,
+    "Polymarket US": 232.5
+   },
+   "lean": "UNDER",
+   "gap": -0.6,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 232.5,
+    "venue_main_totals": {
+     "Kalshi": 233.5,
+     "Novig": 232.5,
+     "Polymarket US": 232.5
+    },
+    "proj_morning": 231.9,
+    "lean": "UNDER",
+    "gap": -0.6
+   }
+  },
+  "401909323": {
+   "away": "Phoenix Suns",
+   "home": "Houston Rockets",
+   "proj": 226.3,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 222.5,
+   "venue_main_totals": {
+    "Kalshi": 223.5,
+    "Polymarket US": 223.5,
+    "Novig": 222.5
+   },
+   "lean": "OVER",
+   "gap": 3.8,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 222.5,
+    "venue_main_totals": {
+     "Kalshi": 223.5,
+     "Polymarket US": 223.5,
+     "Novig": 222.5
+    },
+    "proj_morning": 226.3,
+    "lean": "OVER",
+    "gap": 3.8
+   }
+  },
+  "401909324": {
+   "away": "Sacramento Kings",
+   "home": "Golden State Warriors",
+   "proj": 220.2,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 217.5,
+   "venue_main_totals": {
+    "Kalshi": 218.5,
+    "Novig": 217.5,
+    "Polymarket US": 218.5
+   },
+   "lean": "OVER",
+   "gap": 2.7,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 217.5,
+    "venue_main_totals": {
+     "Kalshi": 218.5,
+     "Novig": 217.5,
+     "Polymarket US": 218.5
+    },
+    "proj_morning": 220.2,
+    "lean": "OVER",
+    "gap": 2.7
+   }
+  },
+  "401909325": {
+   "away": "San Antonio Spurs",
+   "home": "Portland Trail Blazers",
+   "proj": 222.4,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 225.5,
+   "venue_main_totals": {
+    "Kalshi": 226.5,
+    "Novig": 225.5,
+    "Polymarket US": 225.5
+   },
+   "lean": "UNDER",
+   "gap": -3.1,
+   "absences": [],
+   "captured_at": "2026-11-25T13:53+00:00",
+   "first_seen": {
+    "time": "2026-11-25T13:53+00:00",
+    "market_total": 225.5,
+    "venue_main_totals": {
+     "Kalshi": 226.5,
+     "Novig": 225.5,
+     "Polymarket US": 225.5
+    },
+    "proj_morning": 222.4,
+    "lean": "UNDER",
+    "gap": -3.1
+   }
+  }
+ },
+ "updated": "2026-11-25T13:53+00:00"
+}
