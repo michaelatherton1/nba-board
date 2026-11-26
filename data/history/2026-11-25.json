@@ -218,16 +218,16 @@
    "proj_morning": null,
    "proj_report": null,
    "model_used": "v1",
-   "market_total": 215.5,
+   "market_total": 216.5,
    "venue_main_totals": {
-    "Kalshi": 214.5,
-    "Novig": 215.5,
-    "Polymarket US": 215.5
+    "Kalshi": 216.5,
+    "Novig": 216.5,
+    "Polymarket US": 216.5
    },
    "lean": "OVER",
-   "gap": 4.7,
+   "gap": 3.7,
    "absences": [],
-   "captured_at": "2026-11-25T23:31+00:00",
+   "captured_at": "2026-11-26T01:57+00:00",
    "first_seen": {
     "time": "2026-11-25T13:53+00:00",
     "market_total": 217.5,
@@ -248,16 +248,16 @@
    "proj_morning": null,
    "proj_report": null,
    "model_used": "v1",
-   "market_total": 225.5,
+   "market_total": 226.5,
    "venue_main_totals": {
-    "Kalshi": 224.5,
-    "Novig": 225.5,
-    "Polymarket US": 224.5
+    "Kalshi": 226.5,
+    "Novig": 226.5,
+    "Polymarket US": 226.5
    },
    "lean": "UNDER",
-   "gap": -3.1,
+   "gap": -4.1,
    "absences": [],
-   "captured_at": "2026-11-25T23:31+00:00",
+   "captured_at": "2026-11-26T01:57+00:00",
    "first_seen": {
     "time": "2026-11-25T13:53+00:00",
     "market_total": 225.5,
@@ -272,5 +272,5 @@
    }
   }
  },
- "updated": "2026-11-25T23:31+00:00"
+ "updated": "2026-11-26T01:57+00:00"
 }
