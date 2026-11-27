@@ -4,24 +4,24 @@
   "401909326": {
    "away": "Miami Heat",
    "home": "New York Knicks",
-   "proj": 222.3,
+   "proj": 222.7,
    "proj_morning": 221.0,
-   "proj_report": 222.3,
+   "proj_report": 222.7,
    "model_used": "v2 + injury report",
-   "market_total": 222.5,
+   "market_total": 230.5,
    "venue_main_totals": {
     "Kalshi": 223.5,
     "Polymarket US": 222.5,
-    "Novig": 222.5
+    "Novig": 230.5
    },
    "lean": "UNDER",
-   "gap": -0.2,
+   "gap": -7.8,
    "absences": [
     "OG Anunoby",
     "Miles McBride",
     "Andre Drummond"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 222.5,
@@ -42,14 +42,14 @@
    "proj_morning": 221.4,
    "proj_report": 219.3,
    "model_used": "v2 + injury report",
-   "market_total": 218.5,
+   "market_total": 219.5,
    "venue_main_totals": {
     "Kalshi": 218.5,
     "Polymarket US": 218.5,
-    "Novig": 218.5
+    "Novig": 219.5
    },
-   "lean": "OVER",
-   "gap": 0.8,
+   "lean": "UNDER",
+   "gap": -0.2,
    "absences": [
     "Cade Cunningham",
     "Duncan Robinson",
@@ -58,7 +58,7 @@
     "Cormac Ryan",
     "Kam Jones"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 218.5,
@@ -79,14 +79,14 @@
    "proj_morning": 232.0,
    "proj_report": 230.3,
    "model_used": "v2 + injury report",
-   "market_total": 229.5,
+   "market_total": 230.5,
    "venue_main_totals": {
     "Kalshi": 230.5,
     "Polymarket US": 230.5,
-    "Novig": 229.5
+    "Novig": 230.5
    },
-   "lean": "OVER",
-   "gap": 0.8,
+   "lean": "UNDER",
+   "gap": -0.2,
    "absences": [
     "Tyrese Haliburton",
     "Kelly Oubre Jr.",
@@ -96,7 +96,7 @@
     "Joel Embiid",
     "Jaylen Brown"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 229.5,
@@ -117,14 +117,14 @@
    "proj_morning": 218.4,
    "proj_report": 216.6,
    "model_used": "v2 + injury report",
-   "market_total": 218.5,
+   "market_total": 217.5,
    "venue_main_totals": {
     "Kalshi": 218.5,
     "Polymarket US": 218.5,
-    "Novig": 218.5
+    "Novig": 217.5
    },
    "lean": "UNDER",
-   "gap": -1.9,
+   "gap": -0.9,
    "absences": [
     "RJ Barrett",
     "Kawhi Leonard",
@@ -134,7 +134,7 @@
     "Drake Powell",
     "Moritz Wagner"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 218.5,
@@ -155,14 +155,14 @@
    "proj_morning": 225.5,
    "proj_report": 225.6,
    "model_used": "v2 + injury report",
-   "market_total": 222.5,
+   "market_total": 223.5,
    "venue_main_totals": {
     "Kalshi": 222.5,
-    "Polymarket US": 222.5,
-    "Novig": 222.5
+    "Polymarket US": 223.5,
+    "Novig": 223.5
    },
    "lean": "OVER",
-   "gap": 3.1,
+   "gap": 2.1,
    "absences": [
     "Devin Carter",
     "Mitchell Robinson",
@@ -170,7 +170,7 @@
     "Jalen Wilson",
     "Jock Landale"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 222.5,
@@ -191,14 +191,14 @@
    "proj_morning": 224.1,
    "proj_report": 223.0,
    "model_used": "v2 + injury report",
-   "market_total": 222.5,
+   "market_total": 223.5,
    "venue_main_totals": {
     "Kalshi": 223.5,
-    "Polymarket US": 222.5,
-    "Novig": 222.5
+    "Polymarket US": 223.5,
+    "Novig": 223.5
    },
-   "lean": "OVER",
-   "gap": 0.5,
+   "lean": "UNDER",
+   "gap": -0.5,
    "absences": [
     "Anthony Edwards",
     "LaMelo Ball",
@@ -211,7 +211,7 @@
     "Isaiah Stewart",
     "GG Jackson"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 222.5,
@@ -244,7 +244,7 @@
     "Mark Williams",
     "Dereck Lively II"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 227.5,
@@ -267,7 +267,7 @@
    "model_used": "v2 + injury report",
    "market_total": 225.5,
    "venue_main_totals": {
-    "Kalshi": 224.5,
+    "Kalshi": 226.5,
     "Polymarket US": 225.5,
     "Novig": 225.5
    },
@@ -279,7 +279,7 @@
     "De'Aaron Fox",
     "Austin Reaves"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 225.5,
@@ -302,8 +302,8 @@
    "model_used": "v2 + injury report",
    "market_total": 229.5,
    "venue_main_totals": {
-    "Kalshi": 228.5,
-    "Polymarket US": 228.5,
+    "Kalshi": 230.5,
+    "Polymarket US": 229.5,
     "Novig": 229.5
    },
    "lean": "UNDER",
@@ -316,7 +316,7 @@
     "Cam Whitmore",
     "Bryce Hopkins"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 229.5,
@@ -353,7 +353,7 @@
     "Julian Reese",
     "Jaron Pierre Jr."
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 230.5,
@@ -374,14 +374,14 @@
    "proj_morning": 221.3,
    "proj_report": 222.1,
    "model_used": "v2 + injury report",
-   "market_total": 220.5,
+   "market_total": 219.5,
    "venue_main_totals": {
-    "Kalshi": 221.5,
-    "Polymarket US": 221.5,
-    "Novig": 220.5
+    "Kalshi": 219.5,
+    "Polymarket US": 219.5,
+    "Novig": 219.5
    },
    "lean": "OVER",
-   "gap": 1.6,
+   "gap": 2.6,
    "absences": [
     "Ja Morant",
     "Shaedon Sharpe",
@@ -390,7 +390,7 @@
     "Stephen Curry",
     "Kristaps Porzingis"
    ],
-   "captured_at": "2026-11-27T13:52+00:00",
+   "captured_at": "2026-11-27T16:25+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 220.5,
@@ -405,5 +405,5 @@
    }
   }
  },
- "updated": "2026-11-27T13:52+00:00"
+ "updated": "2026-11-27T16:25+00:00"
 }
