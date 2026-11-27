@@ -1,0 +1,409 @@
+{
+ "date": "2026-11-27",
+ "games": {
+  "401909326": {
+   "away": "Miami Heat",
+   "home": "New York Knicks",
+   "proj": 222.3,
+   "proj_morning": 221.0,
+   "proj_report": 222.3,
+   "model_used": "v2 + injury report",
+   "market_total": 222.5,
+   "venue_main_totals": {
+    "Kalshi": 223.5,
+    "Polymarket US": 222.5,
+    "Novig": 222.5
+   },
+   "lean": "UNDER",
+   "gap": -0.2,
+   "absences": [
+    "OG Anunoby",
+    "Miles McBride",
+    "Andre Drummond"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 222.5,
+    "venue_main_totals": {
+     "Kalshi": 223.5,
+     "Polymarket US": 222.5,
+     "Novig": 222.5
+    },
+    "proj_morning": 221.0,
+    "lean": "UNDER",
+    "gap": -1.5
+   }
+  },
+  "401909327": {
+   "away": "Milwaukee Bucks",
+   "home": "Detroit Pistons",
+   "proj": 219.3,
+   "proj_morning": 221.4,
+   "proj_report": 219.3,
+   "model_used": "v2 + injury report",
+   "market_total": 218.5,
+   "venue_main_totals": {
+    "Kalshi": 218.5,
+    "Polymarket US": 218.5,
+    "Novig": 218.5
+   },
+   "lean": "OVER",
+   "gap": 0.8,
+   "absences": [
+    "Cade Cunningham",
+    "Duncan Robinson",
+    "Jalen Duren",
+    "Taurean Prince",
+    "Cormac Ryan",
+    "Kam Jones"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 218.5,
+    "venue_main_totals": {
+     "Kalshi": 218.5,
+     "Polymarket US": 218.5,
+     "Novig": 218.5
+    },
+    "proj_morning": 221.4,
+    "lean": "OVER",
+    "gap": 2.9
+   }
+  },
+  "401909328": {
+   "away": "Philadelphia 76ers",
+   "home": "Indiana Pacers",
+   "proj": 230.3,
+   "proj_morning": 232.0,
+   "proj_report": 230.3,
+   "model_used": "v2 + injury report",
+   "market_total": 229.5,
+   "venue_main_totals": {
+    "Kalshi": 230.5,
+    "Polymarket US": 230.5,
+    "Novig": 229.5
+   },
+   "lean": "OVER",
+   "gap": 0.8,
+   "absences": [
+    "Tyrese Haliburton",
+    "Kelly Oubre Jr.",
+    "Johnny Furphy",
+    "Ben Sheppard",
+    "T.J. McConnell",
+    "Joel Embiid",
+    "Jaylen Brown"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 229.5,
+    "venue_main_totals": {
+     "Kalshi": 230.5,
+     "Polymarket US": 230.5,
+     "Novig": 229.5
+    },
+    "proj_morning": 232.0,
+    "lean": "OVER",
+    "gap": 2.5
+   }
+  },
+  "401909329": {
+   "away": "Brooklyn Nets",
+   "home": "Toronto Raptors",
+   "proj": 216.6,
+   "proj_morning": 218.4,
+   "proj_report": 216.6,
+   "model_used": "v2 + injury report",
+   "market_total": 218.5,
+   "venue_main_totals": {
+    "Kalshi": 218.5,
+    "Polymarket US": 218.5,
+    "Novig": 218.5
+   },
+   "lean": "UNDER",
+   "gap": -1.9,
+   "absences": [
+    "RJ Barrett",
+    "Kawhi Leonard",
+    "Malachi Smith",
+    "Alijah Martin",
+    "Nolan Traore",
+    "Drake Powell",
+    "Moritz Wagner"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 218.5,
+    "venue_main_totals": {
+     "Kalshi": 218.5,
+     "Polymarket US": 218.5,
+     "Novig": 218.5
+    },
+    "proj_morning": 218.4,
+    "lean": "UNDER",
+    "gap": -0.1
+   }
+  },
+  "401909330": {
+   "away": "Atlanta Hawks",
+   "home": "Boston Celtics",
+   "proj": 225.6,
+   "proj_morning": 225.5,
+   "proj_report": 225.6,
+   "model_used": "v2 + injury report",
+   "market_total": 222.5,
+   "venue_main_totals": {
+    "Kalshi": 222.5,
+    "Polymarket US": 222.5,
+    "Novig": 222.5
+   },
+   "lean": "OVER",
+   "gap": 3.1,
+   "absences": [
+    "Devin Carter",
+    "Mitchell Robinson",
+    "CJ McCollum",
+    "Jalen Wilson",
+    "Jock Landale"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 222.5,
+    "venue_main_totals": {
+     "Kalshi": 222.5,
+     "Polymarket US": 222.5,
+     "Novig": 222.5
+    },
+    "proj_morning": 225.5,
+    "lean": "OVER",
+    "gap": 3.0
+   }
+  },
+  "401909331": {
+   "away": "Memphis Grizzlies",
+   "home": "Minnesota Timberwolves",
+   "proj": 223.0,
+   "proj_morning": 224.1,
+   "proj_report": 223.0,
+   "model_used": "v2 + injury report",
+   "market_total": 222.5,
+   "venue_main_totals": {
+    "Kalshi": 223.5,
+    "Polymarket US": 222.5,
+    "Novig": 222.5
+   },
+   "lean": "OVER",
+   "gap": 0.5,
+   "absences": [
+    "Anthony Edwards",
+    "LaMelo Ball",
+    "Donte DiVincenzo",
+    "Jaylen Clark",
+    "Cameron Boozer",
+    "Jerami Grant",
+    "Zach Edey",
+    "Scotty Pippen Jr.",
+    "Isaiah Stewart",
+    "GG Jackson"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 222.5,
+    "venue_main_totals": {
+     "Kalshi": 223.5,
+     "Polymarket US": 222.5,
+     "Novig": 222.5
+    },
+    "proj_morning": 224.1,
+    "lean": "OVER",
+    "gap": 1.6
+   }
+  },
+  "401909332": {
+   "away": "Dallas Mavericks",
+   "home": "Phoenix Suns",
+   "proj": 227.5,
+   "proj_morning": 228.2,
+   "proj_report": 227.5,
+   "model_used": "v2 + injury report",
+   "market_total": 227.5,
+   "venue_main_totals": {
+    "Kalshi": 226.5,
+    "Polymarket US": 227.5,
+    "Novig": 227.5
+   },
+   "lean": "PASS",
+   "gap": 0.0,
+   "absences": [
+    "Mark Williams",
+    "Dereck Lively II"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 227.5,
+    "venue_main_totals": {
+     "Kalshi": 226.5,
+     "Polymarket US": 227.5,
+     "Novig": 227.5
+    },
+    "proj_morning": 228.2,
+    "lean": "OVER",
+    "gap": 0.7
+   }
+  },
+  "401909333": {
+   "away": "Los Angeles Lakers",
+   "home": "San Antonio Spurs",
+   "proj": 225.0,
+   "proj_morning": 222.9,
+   "proj_report": 225.0,
+   "model_used": "v2 + injury report",
+   "market_total": 225.5,
+   "venue_main_totals": {
+    "Kalshi": 224.5,
+    "Polymarket US": 225.5,
+    "Novig": 225.5
+   },
+   "lean": "UNDER",
+   "gap": -0.5,
+   "absences": [
+    "Tobias Harris",
+    "Dylan Harper",
+    "De'Aaron Fox",
+    "Austin Reaves"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 225.5,
+    "venue_main_totals": {
+     "Kalshi": 224.5,
+     "Polymarket US": 225.5,
+     "Novig": 225.5
+    },
+    "proj_morning": 222.9,
+    "lean": "UNDER",
+    "gap": -2.6
+   }
+  },
+  "401909334": {
+   "away": "Denver Nuggets",
+   "home": "Utah Jazz",
+   "proj": 228.9,
+   "proj_morning": 228.7,
+   "proj_report": 228.9,
+   "model_used": "v2 + injury report",
+   "market_total": 229.5,
+   "venue_main_totals": {
+    "Kalshi": 228.5,
+    "Polymarket US": 228.5,
+    "Novig": 229.5
+   },
+   "lean": "UNDER",
+   "gap": -0.6,
+   "absences": [
+    "Lauri Markkanen",
+    "Jusuf Nurkic",
+    "Jaren Jackson Jr.",
+    "Jaxson Hayes",
+    "Cam Whitmore",
+    "Bryce Hopkins"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 229.5,
+    "venue_main_totals": {
+     "Kalshi": 228.5,
+     "Polymarket US": 228.5,
+     "Novig": 229.5
+    },
+    "proj_morning": 228.7,
+    "lean": "UNDER",
+    "gap": -0.8
+   }
+  },
+  "401909335": {
+   "away": "New Orleans Pelicans",
+   "home": "LA Clippers",
+   "proj": 228.0,
+   "proj_morning": 229.0,
+   "proj_report": 228.0,
+   "model_used": "v2 + injury report",
+   "market_total": 230.5,
+   "venue_main_totals": {
+    "Kalshi": 231.5,
+    "Polymarket US": 230.5,
+    "Novig": 230.5
+   },
+   "lean": "UNDER",
+   "gap": -2.5,
+   "absences": [
+    "Bradley Beal",
+    "Jordan Miller",
+    "Dejounte Murray",
+    "Bennedict Mathurin",
+    "Julian Reese",
+    "Jaron Pierre Jr."
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 230.5,
+    "venue_main_totals": {
+     "Kalshi": 231.5,
+     "Polymarket US": 230.5,
+     "Novig": 230.5
+    },
+    "proj_morning": 229.0,
+    "lean": "UNDER",
+    "gap": -1.5
+   }
+  },
+  "401909336": {
+   "away": "Golden State Warriors",
+   "home": "Portland Trail Blazers",
+   "proj": 222.1,
+   "proj_morning": 221.3,
+   "proj_report": 222.1,
+   "model_used": "v2 + injury report",
+   "market_total": 220.5,
+   "venue_main_totals": {
+    "Kalshi": 221.5,
+    "Polymarket US": 221.5,
+    "Novig": 220.5
+   },
+   "lean": "OVER",
+   "gap": 1.6,
+   "absences": [
+    "Ja Morant",
+    "Shaedon Sharpe",
+    "Moses Moody",
+    "Jimmy Butler III",
+    "Stephen Curry",
+    "Kristaps Porzingis"
+   ],
+   "captured_at": "2026-11-27T13:52+00:00",
+   "first_seen": {
+    "time": "2026-11-27T13:52+00:00",
+    "market_total": 220.5,
+    "venue_main_totals": {
+     "Kalshi": 221.5,
+     "Polymarket US": 221.5,
+     "Novig": 220.5
+    },
+    "proj_morning": 221.3,
+    "lean": "OVER",
+    "gap": 0.8
+   }
+  }
+ },
+ "updated": "2026-11-27T13:52+00:00"
+}
