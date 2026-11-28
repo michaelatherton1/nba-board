@@ -17,7 +17,7 @@
    "lean": "OVER",
    "gap": 3.4,
    "absences": [],
-   "captured_at": "2026-11-28T13:39+00:00",
+   "captured_at": "2026-11-28T16:08+00:00",
    "first_seen": {
     "time": "2026-11-28T13:39+00:00",
     "market_total": 218.5,
@@ -40,14 +40,14 @@
    "model_used": "v1",
    "market_total": 212.5,
    "venue_main_totals": {
-    "Kalshi": 213.5,
+    "Kalshi": 211.5,
     "Novig": 212.5,
     "Polymarket US": 212.5
    },
    "lean": "OVER",
    "gap": 0.7,
    "absences": [],
-   "captured_at": "2026-11-28T13:39+00:00",
+   "captured_at": "2026-11-28T16:08+00:00",
    "first_seen": {
     "time": "2026-11-28T13:39+00:00",
     "market_total": 212.5,
@@ -68,16 +68,16 @@
    "proj_morning": null,
    "proj_report": null,
    "model_used": "v1",
-   "market_total": 233.5,
+   "market_total": 232.5,
    "venue_main_totals": {
     "Kalshi": 232.5,
     "Polymarket US": 232.5,
-    "Novig": 233.5
+    "Novig": 232.5
    },
    "lean": "OVER",
-   "gap": 1.9,
+   "gap": 2.9,
    "absences": [],
-   "captured_at": "2026-11-28T13:39+00:00",
+   "captured_at": "2026-11-28T16:08+00:00",
    "first_seen": {
     "time": "2026-11-28T13:39+00:00",
     "market_total": 233.5,
@@ -107,7 +107,7 @@
    "lean": "UNDER",
    "gap": -3.9,
    "absences": [],
-   "captured_at": "2026-11-28T13:39+00:00",
+   "captured_at": "2026-11-28T16:08+00:00",
    "first_seen": {
     "time": "2026-11-28T13:39+00:00",
     "market_total": 228.5,
@@ -128,16 +128,16 @@
    "proj_morning": null,
    "proj_report": null,
    "model_used": "v1",
-   "market_total": 219.5,
+   "market_total": 220.5,
    "venue_main_totals": {
     "Kalshi": 219.5,
     "Polymarket US": 220.5,
-    "Novig": 219.5
+    "Novig": 220.5
    },
    "lean": "OVER",
-   "gap": 4.0,
+   "gap": 3.0,
    "absences": [],
-   "captured_at": "2026-11-28T13:39+00:00",
+   "captured_at": "2026-11-28T16:08+00:00",
    "first_seen": {
     "time": "2026-11-28T13:39+00:00",
     "market_total": 219.5,
@@ -152,5 +152,5 @@
    }
   }
  },
- "updated": "2026-11-28T13:39+00:00"
+ "updated": "2026-11-28T16:08+00:00"
 }
