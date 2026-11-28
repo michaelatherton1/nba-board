@@ -188,16 +188,16 @@
    "proj_morning": null,
    "proj_report": null,
    "model_used": "v1",
-   "market_total": 226.5,
+   "market_total": 225.5,
    "venue_main_totals": {
-    "Kalshi": 226.5,
-    "Polymarket US": 226.5,
-    "Novig": 226.5
+    "Kalshi": 224.5,
+    "Polymarket US": 225.5,
+    "Novig": 225.5
    },
    "lean": "OVER",
-   "gap": 0.5,
+   "gap": 1.5,
    "absences": [],
-   "captured_at": "2026-11-27T23:33+00:00",
+   "captured_at": "2026-11-28T01:55+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 227.5,
@@ -218,16 +218,16 @@
    "proj_morning": null,
    "proj_report": null,
    "model_used": "v1",
-   "market_total": 226.5,
+   "market_total": 227.5,
    "venue_main_totals": {
     "Kalshi": 226.5,
-    "Polymarket US": 226.5,
-    "Novig": 226.5
+    "Polymarket US": 227.5,
+    "Novig": 227.5
    },
    "lean": "UNDER",
-   "gap": -3.7,
+   "gap": -4.7,
    "absences": [],
-   "captured_at": "2026-11-27T23:33+00:00",
+   "captured_at": "2026-11-28T01:55+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 225.5,
@@ -248,16 +248,16 @@
    "proj_morning": null,
    "proj_report": null,
    "model_used": "v1",
-   "market_total": 232.5,
+   "market_total": 231.5,
    "venue_main_totals": {
     "Kalshi": 232.5,
-    "Polymarket US": 232.5,
-    "Novig": 232.5
+    "Polymarket US": 231.5,
+    "Novig": 231.5
    },
    "lean": "UNDER",
-   "gap": -4.9,
+   "gap": -3.9,
    "absences": [],
-   "captured_at": "2026-11-27T23:33+00:00",
+   "captured_at": "2026-11-28T01:55+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 229.5,
@@ -281,13 +281,13 @@
    "market_total": 229.5,
    "venue_main_totals": {
     "Kalshi": 229.5,
-    "Polymarket US": 230.5,
+    "Polymarket US": 229.5,
     "Novig": 229.5
    },
    "lean": "UNDER",
    "gap": -0.5,
    "absences": [],
-   "captured_at": "2026-11-27T23:33+00:00",
+   "captured_at": "2026-11-28T01:55+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 230.5,
@@ -317,7 +317,7 @@
    "lean": "OVER",
    "gap": 7.2,
    "absences": [],
-   "captured_at": "2026-11-27T23:33+00:00",
+   "captured_at": "2026-11-28T01:55+00:00",
    "first_seen": {
     "time": "2026-11-27T13:52+00:00",
     "market_total": 220.5,
@@ -332,5 +332,5 @@
    }
   }
  },
- "updated": "2026-11-27T23:33+00:00"
+ "updated": "2026-11-28T01:55+00:00"
 }
