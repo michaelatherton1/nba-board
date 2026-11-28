@@ -1,0 +1,156 @@
+{
+ "date": "2026-11-28",
+ "games": {
+  "401910046": {
+   "away": "Orlando Magic",
+   "home": "Washington Wizards",
+   "proj": 221.9,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 218.5,
+   "venue_main_totals": {
+    "Kalshi": 219.5,
+    "Polymarket US": 218.5,
+    "Novig": 218.5
+   },
+   "lean": "OVER",
+   "gap": 3.4,
+   "absences": [],
+   "captured_at": "2026-11-28T13:39+00:00",
+   "first_seen": {
+    "time": "2026-11-28T13:39+00:00",
+    "market_total": 218.5,
+    "venue_main_totals": {
+     "Kalshi": 219.5,
+     "Polymarket US": 218.5,
+     "Novig": 218.5
+    },
+    "proj_morning": 221.9,
+    "lean": "OVER",
+    "gap": 3.4
+   }
+  },
+  "401910047": {
+   "away": "Brooklyn Nets",
+   "home": "Charlotte Hornets",
+   "proj": 213.2,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 212.5,
+   "venue_main_totals": {
+    "Kalshi": 213.5,
+    "Novig": 212.5,
+    "Polymarket US": 212.5
+   },
+   "lean": "OVER",
+   "gap": 0.7,
+   "absences": [],
+   "captured_at": "2026-11-28T13:39+00:00",
+   "first_seen": {
+    "time": "2026-11-28T13:39+00:00",
+    "market_total": 212.5,
+    "venue_main_totals": {
+     "Kalshi": 213.5,
+     "Novig": 212.5,
+     "Polymarket US": 212.5
+    },
+    "proj_morning": 213.2,
+    "lean": "OVER",
+    "gap": 0.7
+   }
+  },
+  "401910048": {
+   "away": "Indiana Pacers",
+   "home": "Chicago Bulls",
+   "proj": 235.4,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 233.5,
+   "venue_main_totals": {
+    "Kalshi": 232.5,
+    "Polymarket US": 232.5,
+    "Novig": 233.5
+   },
+   "lean": "OVER",
+   "gap": 1.9,
+   "absences": [],
+   "captured_at": "2026-11-28T13:39+00:00",
+   "first_seen": {
+    "time": "2026-11-28T13:39+00:00",
+    "market_total": 233.5,
+    "venue_main_totals": {
+     "Kalshi": 232.5,
+     "Polymarket US": 232.5,
+     "Novig": 233.5
+    },
+    "proj_morning": 235.4,
+    "lean": "OVER",
+    "gap": 1.9
+   }
+  },
+  "401910049": {
+   "away": "Oklahoma City Thunder",
+   "home": "Milwaukee Bucks",
+   "proj": 224.6,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 228.5,
+   "venue_main_totals": {
+    "Kalshi": 228.5,
+    "Polymarket US": 228.5,
+    "Novig": 228.5
+   },
+   "lean": "UNDER",
+   "gap": -3.9,
+   "absences": [],
+   "captured_at": "2026-11-28T13:39+00:00",
+   "first_seen": {
+    "time": "2026-11-28T13:39+00:00",
+    "market_total": 228.5,
+    "venue_main_totals": {
+     "Kalshi": 228.5,
+     "Polymarket US": 228.5,
+     "Novig": 228.5
+    },
+    "proj_morning": 224.6,
+    "lean": "UNDER",
+    "gap": -3.9
+   }
+  },
+  "401910050": {
+   "away": "Philadelphia 76ers",
+   "home": "Houston Rockets",
+   "proj": 223.5,
+   "proj_morning": null,
+   "proj_report": null,
+   "model_used": "v1",
+   "market_total": 219.5,
+   "venue_main_totals": {
+    "Kalshi": 219.5,
+    "Polymarket US": 220.5,
+    "Novig": 219.5
+   },
+   "lean": "OVER",
+   "gap": 4.0,
+   "absences": [],
+   "captured_at": "2026-11-28T13:39+00:00",
+   "first_seen": {
+    "time": "2026-11-28T13:39+00:00",
+    "market_total": 219.5,
+    "venue_main_totals": {
+     "Kalshi": 219.5,
+     "Polymarket US": 220.5,
+     "Novig": 219.5
+    },
+    "proj_morning": 223.5,
+    "lean": "OVER",
+    "gap": 4.0
+   }
+  }
+ },
+ "updated": "2026-11-28T13:39+00:00"
+}
